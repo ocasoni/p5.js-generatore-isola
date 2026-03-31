@@ -8,6 +8,9 @@ let pratoImage;
 let sabbiaImage;
 let fioreImage;
 let fungoImage;
+let farfallaImage;
+let octopusImage;
+let sunImage;
 
 
 function preload() {
@@ -16,6 +19,10 @@ function preload() {
   sabbiaImage = loadImage("assets/tiles/Sabbia.png");
   fioreImage = loadImage("assets/sprites/fiore.png");
   fungoImage = loadImage("assets/sprites/fungo.png");
+  farfallaImage = loadImage("assets/animals/Farfalla.png");
+  octopusImage = loadImage("assets/animals/Octopus.png");
+  sunImage = loadImage("assets/animals/Sun.png");
+
 }
 
 function setup() {
@@ -62,18 +69,40 @@ function setup() {
       
     
       //fiore
-      if (random() < 0.1 && altitude > beachLevel) {
+      if (random() < 0.03 && altitude > beachLevel) {
         image(fioreImage, x, y, SPRITES_SIZE, SPRITES_SIZE);
       }
       //fungo
       if (random() < 0.05 && altitude > beachLevel) {
         image(fungoImage, x, y, SPRITES_SIZE, SPRITES_SIZE);
       }
-      
-      
-
     }
   }
+//ANIMALS
+  for (let x = 0; x < width; x= x +TILE_SIZE) {
+    for (let y = 0; y < height; y= y +TILE_SIZE) {
+      let altitude = computeAltitude(x, y, centralX, centralY);
+      
+      //Calcola colore
+      let seaLevel = 0.2; // Livello del mare al 50% dell'altitudine massima
+      let beachLevel = 0.25; // Livello della spiaggia al 60% dell'altitudine massima
+      
+    
+      //farfalla
+      if (random() < 0.02 && altitude > beachLevel) {
+        image(farfallaImage, x, y, SPRITES_SIZE, SPRITES_SIZE);
+      }
+      //sun
+      if (random() < 0.01 && altitude > beachLevel) {
+        image(sunImage, x, y, SPRITES_SIZE, SPRITES_SIZE);
+      }
+      //octopus
+      if (random() < 0.01 && altitude < seaLevel) {
+        image(octopusImage, x, y, SPRITES_SIZE, SPRITES_SIZE);
+      }
+    }
+  }
+
 }
 function computeAltitude(x, y, centralX, centralY) {
   //Calcola distanza dal centro 
